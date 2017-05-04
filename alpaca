@@ -1,19 +1,21 @@
 #!/usr/bin/env ruby
 
-puts 'start update'
-system 'sudo apt-get update'
+if ARGV.length == 1 and ARGV[0] == 'setup'
+  puts 'start update'
+  system 'sudo apt-get update'
 
-puts 'install rvm'
-system '\curl -sSL https://get.rvm.io | bash && rvm reload'
+  puts 'install rvm'
+  system '\curl -sSL https://get.rvm.io | bash && rvm reload'
 
-puts 'install ruby 2.4.1'
-system 'rvm install 2.4.1 --default'
+  puts 'install ruby 2.4.1'
+  system 'rvm install 2.4.1 --default'
 
-puts 'configure gemset'
-system 'rvm gemset create rails5.1 && rvm use 2.4.1@rails5.1 --default'
+  puts 'configure gemset'
+  system 'rvm gemset create rails5.1 && rvm use 2.4.1@rails5.1 --default'
 
-puts 'install rails'
-system 'gem install rails -v 5.1'
+  puts 'install rails'
+  system 'gem install rails -v 5.1'
 
-puts 'install yarn'
-system 'npm install --global yarn'
+  puts 'install yarn'
+  system 'npm install --global yarn'
+end
