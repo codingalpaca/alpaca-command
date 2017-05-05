@@ -30,6 +30,7 @@ then
   exit 1
 fi
 
+source /usr/local/rvm/scripts/rvm
 rvm use 2.4.1 --default
 
 echo -e "Cofiguring RVM..."
