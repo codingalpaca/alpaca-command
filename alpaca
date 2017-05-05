@@ -1,26 +1,67 @@
-#!/usr/bin/env ruby
+#!/bin/bash
 
-require 'fileutils'
+echo -e "Updating..."
+sudo apt-get update 2> /dev/null
 
-if ARGV.length == 1 and ARGV[0] == 'setup'
-  puts 'start update'
-  system 'sudo apt-get update'
+if [ $? -ne 0 ]
+then
+  echo "Something went wrong when updating." >&2
+  exit 1
+fi
 
-  puts 'install rvm'
-  system '\curl -sSL https://get.rvm.io | bash && rvm reload'
+echo -e "Installing RVM..."
+\curl -sSL https://get.rvm.io | bash 2> /dev/null
 
-  puts 'install ruby 2.4.1'
-  system 'rvm install 2.4.1 && rvm use 2.4.1 --default'
+if [ $? -ne 0 ]
+then
+  echo "Something went wrong when installing RVM." >&2
+  exit 1
+fi
 
-  puts 'configure gemset'
-  system 'rvm gemset create rails5.1 && rvm use 2.4.1@rails5.1 --default'
+# need to reload to use rvm
+rvm reload
 
-  puts 'install rails'
-  system 'gem install rails -v 5.1'
+echo -e "Installing ruby 2.4.1..."
+rvm install 2.4.1 2> /dev/null
 
-  puts 'install yarn'
-  system 'npm install --global yarn'
+if [ $? -ne 0 ]
+then
+  echo "Something went wrong when installing ruby 2.4.1." >&2
+  exit 1
+fi
 
-  puts 'removing script dir'
-  FileUtils.rm_r File.dirname(__FILE__)
-end
+rvm use 2.4.1 --default
+
+echo -e "Cofiguring RVM..."
+rvm gemset create rails5.1 --default 2> /dev/null
+
+if [ $? -ne 0 ]
+then
+  echo "Cannot create RVM gemset!" >&2
+  exit 1
+fi
+
+rvm use 2.4.1@rails5.1
+
+echo -e "Installing rails 5.1..."
+gem install rails -v 5.1 2> /dev/null
+
+if [ $? -ne 0 ]
+then
+  echo "Something went wrong when installing rails 5.1." >&2
+  exit 1
+fi
+
+echo -e "Installing yarn..."
+npm install --global yarn
+
+if [ $? -ne 0 ]
+then
+  echo "Something went wrong when installing yarn." >&2
+  exit 1
+fi
+
+echo -e "Clear commad files"
+rm -rf alpaca-command
+
+echo -e "Finish environment settings! Have fun coding!"
