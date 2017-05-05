@@ -5,5 +5,5 @@
 直接在空的 C9 專案中輸入：
 
 ```
-git clone https://github.com/codingalpaca/alpaca-command.git && alpaca-command/alpaca setup
+git clone https://github.com/codingalpaca/alpaca-command.git && alpaca-command/alpaca
 ```
