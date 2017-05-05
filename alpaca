@@ -1,16 +1,16 @@
 #!/bin/bash
 
-echo -e "Updating..."
-sudo apt-get update 2> /dev/null
+echo -e "Alpaca says: Updating system..."
+sudo apt-get update 1> /dev/null
 
 if [ $? -ne 0 ]
 then
-  echo "Something went wrong when updating." >&2
+  echo "Something went wrong when updating."
   exit 1
 fi
 
-echo -e "Installing RVM..."
-\curl -sSL https://get.rvm.io | bash 2> /dev/null
+echo -e "Alpaca says: Installing RVM..."
+\curl -sSL https://get.rvm.io | bash 12> /dev/null
 
 if [ $? -ne 0 ]
 then
@@ -19,9 +19,9 @@ then
 fi
 
 # need to reload to use rvm
-rvm reload
+rvm reload > /dev/null
 
-echo -e "Installing ruby 2.4.1..."
+echo -e "Alpaca says: Installing ruby 2.4.1"
 rvm install 2.4.1 2> /dev/null
 
 if [ $? -ne 0 ]
@@ -30,21 +30,16 @@ then
   exit 1
 fi
 
+# need to include script first
 source /usr/local/rvm/scripts/rvm
-rvm use 2.4.1 --default
 
-echo -e "Cofiguring RVM..."
-rvm gemset create rails5.1 --default 2> /dev/null
+rvm use 2.4.1 --default > /dev/null
 
-if [ $? -ne 0 ]
-then
-  echo "Cannot create RVM gemset!" >&2
-  exit 1
-fi
+rvm gemset create rails5.1 --default > /dev/null
 
-rvm use 2.4.1@rails5.1
+rvm use 2.4.1@rails5.1 --default > /dev/null
 
-echo -e "Installing rails 5.1..."
+echo -e "Alpaca says: Installing rails 5.1.0"
 gem install rails -v 5.1 2> /dev/null
 
 if [ $? -ne 0 ]
@@ -53,7 +48,7 @@ then
   exit 1
 fi
 
-echo -e "Installing yarn..."
+echo -e "Alpaca says: Installing yarn..."
 npm install --global yarn
 
 if [ $? -ne 0 ]
@@ -62,7 +57,7 @@ then
   exit 1
 fi
 
-echo -e "Clear commad files"
+echo -e "Clear command files"
 rm -rf alpaca-command
 
-echo -e "Finish environment settings! Have fun coding!"
+echo -e "Success! Have fun coding!"
