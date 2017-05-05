@@ -1,6 +1,9 @@
 #!/bin/bash
 
-echo -e "Alpaca says: Updating system..."
+ORANGE="\033[38;5;208m"
+CLEAR="\033[0;00m"
+
+echo -e "$ORANGE Alpaca says: Updating system... $CLEAR"
 sudo apt-get update 1> /dev/null
 
 if [ $? -ne 0 ]
@@ -9,8 +12,8 @@ then
   exit 1
 fi
 
-echo -e "Alpaca says: Installing RVM..."
-\curl -sSL https://get.rvm.io | bash 12> /dev/null
+echo -e "$ORANGE Alpaca says: Installing RVM... $CLEAR"
+\curl -sSL https://get.rvm.io | bash 2> /dev/null
 
 if [ $? -ne 0 ]
 then
@@ -21,7 +24,7 @@ fi
 # need to reload to use rvm
 rvm reload > /dev/null
 
-echo -e "Alpaca says: Installing ruby 2.4.1"
+echo -e "$ORANGE Alpaca says: Installing ruby 2.4.1 $CLEAR"
 rvm install 2.4.1 2> /dev/null
 
 if [ $? -ne 0 ]
@@ -39,7 +42,7 @@ rvm gemset create rails5.1 --default > /dev/null
 
 rvm use 2.4.1@rails5.1 --default > /dev/null
 
-echo -e "Alpaca says: Installing rails 5.1.0"
+echo -e "$ORANGE Alpaca says: Installing rails 5.1.0 $CLEAR"
 gem install rails -v 5.1 2> /dev/null
 
 if [ $? -ne 0 ]
@@ -48,7 +51,7 @@ then
   exit 1
 fi
 
-echo -e "Alpaca says: Installing yarn..."
+echo -e "$ORANGE Alpaca says: Installing yarn... $CLEAR"
 npm install --global yarn
 
 if [ $? -ne 0 ]
@@ -60,4 +63,4 @@ fi
 echo -e "Clear command files"
 rm -rf alpaca-command
 
-echo -e "Success! Have fun coding!"
+echo -e "\033[38;5;40mSuccess! Have fun coding! $CLEAR"
