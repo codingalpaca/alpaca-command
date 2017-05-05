@@ -10,7 +10,7 @@ if ARGV.length == 1 and ARGV[0] == 'setup'
   system '\curl -sSL https://get.rvm.io | bash && rvm reload'
 
   puts 'install ruby 2.4.1'
-  system 'rvm install 2.4.1 --default'
+  system 'rvm install 2.4.1 && rvm use 2.4.1 --default'
 
   puts 'configure gemset'
   system 'rvm gemset create rails5.1 && rvm use 2.4.1@rails5.1 --default'
