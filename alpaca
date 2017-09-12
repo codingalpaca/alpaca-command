@@ -14,7 +14,7 @@ fi
 
 # upgrading RVM
 echo -e "$ORANGE Alpaca says: Upgrading RVM... $CLEAR"
-rvm get stable 2> /dev/null
+sudo rvm get stable 2> /dev/null
 
 if [ $? -ne 0 ]
 then
