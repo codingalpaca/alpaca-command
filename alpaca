@@ -43,8 +43,8 @@ rvm gemset create rails5.1 --default > /dev/null
 
 rvm use 2.4.1@rails5.1 --default > /dev/null
 
-echo -e "$ORANGE Alpaca says: Installing rails 5.1.0 $CLEAR"
-gem install rails -v 5.1.3 2> /dev/null
+echo -e "$ORANGE Alpaca says: Installing rails 5.1 $CLEAR"
+gem install rails -v 5.1 2> /dev/null
 
 if [ $? -ne 0 ]
 then
