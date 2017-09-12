@@ -12,12 +12,13 @@ then
   exit 1
 fi
 
-echo -e "$ORANGE Alpaca says: Installing RVM... $CLEAR"
-\curl -sSL https://get.rvm.io | bash 2> /dev/null
+# upgrading RVM
+echo -e "$ORANGE Alpaca says: Upgrading RVM... $CLEAR"
+rvm get stable 2> /dev/null
 
 if [ $? -ne 0 ]
 then
-  echo "Something went wrong when installing RVM." >&2
+  echo "Something went wrong when upgrading RVM." >&2
   exit 1
 fi
 
